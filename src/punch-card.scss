@@ -6,7 +6,7 @@ body {
 #punch-card {
     $border-color: #eee;
     $data-color: #666;
-    $data-color-hover: #333;
+    $data-color-hover: #4183c4;
     $text-color: #333;
     $day-name-width: 70px;
     $cell-width: 35px;
@@ -55,10 +55,21 @@ body {
                 margin: -30px 0 0 -25px;
                 position: absolute;
                 z-index: 3;
-                background: $data-color-hover;
+                background: $text-color;
                 color: #eee;
                 font-size: 11px;
                 display: none;
+
+                .arrow {
+                    $size: 12px;
+                    width: 0;
+                    height: 0;
+                    border-left: $size solid transparent;
+                    border-right: $size solid transparent;
+                    border-top: $size solid $text-color;
+                    position: absolute;
+                    margin: 0 0 0 20px;
+                }
             }
 
             .punch-card-hour-tick {
