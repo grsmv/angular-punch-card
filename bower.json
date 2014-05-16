@@ -1,8 +1,8 @@
 {
-  "name": "punch-card",
-  "version": "0.0.1.0",
-  "dependencies": {
-    "angular": "1.3.0-build.2704+sha.a4ec118",
-    "angular-route": "1.3.0-build.2704+sha.a4ec118"
-  }
+    "name": "angular-punch-card",
+    "version": "0.0.1.0",
+    "dependencies": {
+        "angular": "1.3.0-build.2704+sha.a4ec118",
+        "angular-route": "1.3.0-build.2704+sha.a4ec118"
+    }
 }
