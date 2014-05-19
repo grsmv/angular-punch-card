@@ -5,7 +5,9 @@
     return {
       restrict: "AE",
       scope: {
-        data: "="
+        data: "=",
+        plural: "@",
+        singular: "@"
       },
       link: function($scope) {
         var flatten, max;
@@ -21,11 +23,18 @@
         max = flatten.sort(function(a, b) {
           return a - b;
         })[flatten.length - 1];
-        return $scope.size = function(n) {
+        $scope.size = function(n) {
           return Math.floor(100 / max * +n / 10);
         };
+        return $scope.description = function(n) {
+          if (n === 1) {
+            return $scope.singular || "event";
+          } else {
+            return $scope.plural || "events";
+          }
+        };
       },
-      template: "<div id=\"punch-card\">\n    <div class=\"punch-card-day\" ng-repeat='day in days'>\n        <div class=\"punch-card-day-name\">\n            <div class=\"punch-card-day-name-label\">{{ day }}</div>\n        </div>\n        <div class=\"punch-card-hour\"\n             ng-repeat='hour in hours'\n             ng-init=\"n = data[$parent.$index][$index]\">\n            <div class=\"punch-card-hour-data size-{{ size(n) }}\"></div>\n            <div class=\"punch-card-hour-tooltip\" ng-show=\"n\">\n                <b>{{ n }}</b> statements\n                <div class=\"arrow\"></div>\n            </div>\n            <div class=\"punch-card-hour-tick\"\n                 ng-class=\"{ 'odd': isOdd($index+1), 'even': isEven($index+1)}\">\n            </div>\n        </div>\n    </div>\n    <div class=\"punch-card-hour-name\">\n        <div class=\"punch-card-hour-name-label\" ng-repeat='hour in hours'>\n            {{ hour }}\n        </div>\n    </div>\n</div>"
+      template: "<div id=\"punch-card\">\n    <div class=\"punch-card-day\" ng-repeat='day in days'>\n        <div class=\"punch-card-day-name\">\n            <div class=\"punch-card-day-name-label\">{{ day }}</div>\n        </div>\n        <div class=\"punch-card-hour\"\n             ng-repeat='hour in hours'\n             ng-init=\"n = data[$parent.$index][$index]\">\n            <div class=\"punch-card-hour-data size-{{ size(n) }}\"></div>\n            <div class=\"punch-card-hour-tooltip\" ng-show=\"n\">\n                <b>{{ n }}</b> {{ description(n) }}\n                <div class=\"arrow\"></div>\n            </div>\n            <div class=\"punch-card-hour-tick\"\n                 ng-class=\"{ 'odd': isOdd($index+1), 'even': isEven($index+1)}\">\n            </div>\n        </div>\n    </div>\n    <div class=\"punch-card-hour-name\">\n        <div class=\"punch-card-hour-name-label\" ng-repeat='hour in hours'>\n            {{ hour }}\n        </div>\n    </div>\n</div>"
     };
   });
 

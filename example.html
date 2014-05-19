@@ -8,12 +8,18 @@
     <script src="dist/punch-card.js"></script>
     <link href="dist/punch-card.css" rel="stylesheet"/>
 
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+        }
+    </style>
+
     <script>
         var app = angular.module("app", ["punchCard", "ngRoute"]);
         app.config(function ($routeProvider) {
             $routeProvider.when("/", {
                 controller: "IndexController",
-                template: '<div punch-card data="punchCardData"></div>'
+                template: '<div punch-card data="punchCardData" singular="statement" plural="statemets"></div>'
             });
         });
         

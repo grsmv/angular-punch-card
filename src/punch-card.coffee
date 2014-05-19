@@ -5,6 +5,8 @@ angular.module("punchCard").directive "punchCard" , ->
 
     scope:
         data: "="
+        plural: "@"
+        singular: "@"
 
     link: ($scope) ->
         $scope.days = [
@@ -22,6 +24,12 @@ angular.module("punchCard").directive "punchCard" , ->
         max = flatten.sort((a, b) -> a - b)[flatten.length - 1]
         $scope.size = (n) -> Math.floor(100 / max * +n / 10)
 
+        $scope.description = (n) ->
+            if n == 1
+                $scope.singular || "event"
+            else
+                $scope.plural || "events"
+
     template: """
         <div id="punch-card">
             <div class="punch-card-day" ng-repeat='day in days'>
@@ -33,7 +41,7 @@ angular.module("punchCard").directive "punchCard" , ->
                      ng-init="n = data[$parent.$index][$index]">
                     <div class="punch-card-hour-data size-{{ size(n) }}"></div>
                     <div class="punch-card-hour-tooltip" ng-show="n">
-                        <b>{{ n }}</b> statements
+                        <b>{{ n }}</b> {{ description(n) }}
                         <div class="arrow"></div>
                     </div>
                     <div class="punch-card-hour-tick"
