@@ -3,36 +3,43 @@
     $data-color: #666;
     $data-color-hover: #4183c4;
     $text-color: #333;
-    $day-name-width: 70px;
-    $cell-width: 35px;
-    $cell-height: 40px;
+    $day-name-width: 5.7em;
+    $cell-width: 2.5em;
+    $cell-height: 3.3em;
 
-    min-width: 950px;
+    width: 65em;
+    font-size: 14px;
+    padding-top: 0.7em;
     overflow: hidden;
+
+    *{
+        box-sizing: border-box;
+    }
 
     .punch-card-day {
         width: 100%;
-        height: $cell-height;
-        margin: 20px 0 0 0;
+        height: 3.3em;
+        position: relative;
+        margin: 1em 0 0 0;
+        border-bottom: 1px solid $border-color;
 
         .punch-card-day-name {
             float: left;
             width: $day-name-width;
-            height: $cell-height;
-            font-size: 12px;
+            height: 3.8em;
+            font-size: 0.86em;
             color: $text-color;
-            border-bottom: 1px solid $border-color;
 
             .punch-card-day-name-label {
-                margin-top: 8px;
+                margin-top: 1em;
             }
         }
 
         .punch-card-hour {
+            position: relative;
             float: left;
             height: $cell-height;
             width: $cell-width;
-            border-bottom: 1px solid $border-color;
             cursor: pointer;
 
             &:hover {
@@ -46,24 +53,33 @@
             }
 
             .punch-card-hour-tooltip {
-                padding: 5px 10px;
-                margin: -30px 0 0 -25px;
                 position: absolute;
+                left: 50%;
+                padding: 0.4em 0.9em;
+                margin-top: -2.1em;
+                -webkit-transform:translateX(-50%);
+                   -moz-transform:translateX(-50%);
+                    -ms-transform:translateX(-50%);
+                     -o-transform:translateX(-50%);
+                        transform:translateX(-50%);
                 z-index: 3;
                 background: $text-color;
                 color: #eee;
-                font-size: 11px;
+                font-size: 0.8em;
+                white-space: nowrap;
                 display: none;
 
                 .arrow {
-                    $size: 12px;
+                    $size: 1em;
+                    position: absolute;
+                    margin: 0 auto;
+                    left: 0;
+                    right: 0;
                     width: 0;
                     height: 0;
                     border-left: $size solid transparent;
                     border-right: $size solid transparent;
                     border-top: $size solid $text-color;
-                    position: absolute;
-                    margin: 0 0 0 20px;
                 }
             }
 
@@ -71,42 +87,42 @@
                 width: 1px;
                 background: $border-color;
                 position: absolute;
+                bottom: 0;
                 margin-left: $cell-width / 2;
                 z-index: 1;
-
-                &.odd {
-                    $coefficient: 10;
-                    height: $cell-height / 2 - $coefficient;
-                    margin-top: $cell-height / 2 + $coefficient;
-                }
-
-                &.even {
-                    $coefficient: 16;
-                    margin-top: $cell-height / 2 + $coefficient;
-                    height: $cell-height / 2 - $coefficient;
-                }
             }
 
-            @mixin hour-data ($radius) {
-                width: $radius;
-                height: $radius;
-                border-radius: $radius;
-                margin: ($cell-height / 2 - $radius / 2 - 5) 0 0 ($cell-width / 2 - $radius / 2);
+            &:nth-child(odd) .punch-card-hour-tick{
+                $coefficient: 0.25;
+                height: $cell-height / 4 - $coefficient;
+            }
+
+            &:nth-child(even) .punch-card-hour-tick{
+                $coefficient: 0.5;
+                height: $cell-height / 4 - $coefficient;
             }
 
             .punch-card-hour-data {
                 background: $data-color;
                 position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0.6em;
+                left: 0;
+                margin: auto;
                 z-index: 2;
 
-                @for $i from 1 through 10 {
+                @for $i from 0 through 10 {
                     &.size-#{$i} {
-                        $radius: 3 * $i;
-                        width: #{$radius}px;
-                        height: #{$radius}px;
-                        border-radius: #{$radius}px;
-                        margin: ($cell-height / 2 - $radius / 2 - 5) 0 0 ($cell-width / 2 - $radius / 2 + 1);
+                        $radius: 0.21 * $i;
+                        width: #{$radius}em;
+                        height: #{$radius}em;
+                        border-radius: #{$radius}em;
                     }
+                }
+
+                &.size-null{
+                    background: transparent;
                 }
             }
         }
@@ -118,10 +134,10 @@
         margin: 20px 0 0 $day-name-width;
 
         .punch-card-hour-name-label {
-            font-size: 12px;
+            font-size: 0.86em;
             color: $text-color;
             float: left;
-            width: $cell-width;
+            width: 2.9em;
         }
     }
 }
