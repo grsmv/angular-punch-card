@@ -17,9 +17,6 @@ angular.module("punchCard").directive "punchCard" , ->
             "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"
         ]
 
-        $scope.isOdd = (index) -> not index % 2 == 0
-        $scope.isEven = (index) -> index % 2 == 0
-
         flatten = [].concat.apply([], $scope.data)
         max = flatten.sort((a, b) -> a - b)[flatten.length - 1]
         $scope.size = (n) -> Math.floor(100 / max * +n / 10)
@@ -44,9 +41,7 @@ angular.module("punchCard").directive "punchCard" , ->
                         <b>{{ n }}</b> {{ description(n) }}
                         <div class="arrow"></div>
                     </div>
-                    <div class="punch-card-hour-tick"
-                         ng-class="{ 'odd': isOdd($index+1), 'even': isEven($index+1)}">
-                    </div>
+                    <div class="punch-card-hour-tick"></div>
                 </div>
             </div>
             <div class="punch-card-hour-name">

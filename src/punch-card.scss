@@ -73,18 +73,18 @@
                 position: absolute;
                 margin-left: $cell-width / 2;
                 z-index: 1;
+            }
 
-                &.odd {
-                    $coefficient: 10;
-                    height: $cell-height / 2 - $coefficient;
-                    margin-top: $cell-height / 2 + $coefficient;
-                }
+            &:nth-child(odd) .punch-card-hour-tick{
+                $coefficient: 10;
+                height: $cell-height / 2 - $coefficient;
+                margin-top: $cell-height / 2 + $coefficient;
+            }
 
-                &.even {
-                    $coefficient: 16;
-                    margin-top: $cell-height / 2 + $coefficient;
-                    height: $cell-height / 2 - $coefficient;
-                }
+            &:nth-child(even) .punch-card-hour-tick{
+                $coefficient: 16;
+                margin-top: $cell-height / 2 + $coefficient;
+                height: $cell-height / 2 - $coefficient;
             }
 
             @mixin hour-data ($radius) {
